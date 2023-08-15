@@ -21,10 +21,19 @@ async function addNewVehicle(vehicle){
 }
 
 async function updateVehicle(vehicle){
+    const vehicleRecord = await Service.findById(vehicle._id);
+    if(!vehicleRecord)
+        throw new Error(`Vehicle doesn't exist`);
+
     return await Vehicle.findByIdAndUpdate(vehicle._id, vehicle);
 }
 
 async function deleteVehicle(id){
+    const vehicle = Vehicle.findById(id);
+    if(!vehicle){
+        throw new Error(`Vehicle doesn't exist`);
+    }
+
     await Vehicle.findByIdAndDelete(id);
 }
 
