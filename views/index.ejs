@@ -1,0 +1,51 @@
+<!-- <html>
+    <script type="text/javascript" defer src="/js/script.js"></script>
+
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form" action="/users/register" method="post">
+                <input type="text" placeholder="name" />
+                <input type="password" placeholder="password" />
+                <button>create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form" action="/users/login" method="post">
+                <input type="text" placeholder="username" name="username" />
+                <input type="password" placeholder="password" name="password"/>
+                <input type="submit" value="Login" class="btn">
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Slide Navbar</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+			<div class="login">
+				<form action="/users/login" method="post">
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="text" name="username" placeholder="User name" required="">
+					<input type="password" name="password" placeholder="Password" required="">
+					<button>Login</button>
+				</form>
+			</div>
+
+            <div class="signup">
+				<form action="/users/register" method="post">
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" name="username" placeholder="User name" required="">
+					<input type="password" name="password" placeholder="Password" required="">
+					<button>Sign up</button>
+				</form>
+			</div>
+	</div>
+</body>
+</html>
