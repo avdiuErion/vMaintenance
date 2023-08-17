@@ -8,13 +8,15 @@ const {
     httpAddNewVehicle,
     httpGetVehicleById,
     httpDeleteVehicle,
-    httpUpdateVehicle
+    httpUpdateVehicle,
+    httpGetUpdateVehicle
 } = require('../controllers/vehicles.controller');
 
-vehiclesRouter.get('/', Authorize, httpGetAllVehicles);
+vehiclesRouter.get('/', httpGetAllVehicles);
 vehiclesRouter.post('/', Authorize, httpAddNewVehicle);
 vehiclesRouter.get('/:id', Authorize, httpGetVehicleById);
 vehiclesRouter.delete('/:id', Authorize, httpDeleteVehicle);
-vehiclesRouter.put('/', Authorize, httpUpdateVehicle);
+vehiclesRouter.put('/:id', Authorize, httpUpdateVehicle);
+vehiclesRouter.get('/update-vehicle/:id', Authorize, httpGetUpdateVehicle);
 
 module.exports = vehiclesRouter;

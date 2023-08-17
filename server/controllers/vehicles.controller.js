@@ -1,58 +1,73 @@
 const { getAllVehicles, addNewVehicle, getById, updateVehicle, deleteVehicle } = require('../models/vehicles/vehicles.model');
 
-async function httpGetAllVehicles(req, res){
-    try{
-        return res.status(200).json(await getAllVehicles());
-    }catch(Error){
+async function httpGetAllVehicles(req, res) {
+    try {
+        const data = await getAllVehicles();
+
+        res.render('vehicles/vehicles', {
+            data
+        });
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
 
-async function httpGetVehicleById(req, res){
-    try{
+async function httpGetVehicleById(req, res) {
+    try {
         const id = req.params.id;
         const vehicle = await getById(id);
-    
-        if(vehicle)
+
+        if (vehicle)
             return res.status(200).json(vehicle);
 
         return res.status(404).json();
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
-    } 
+    }
 }
 
-async function httpAddNewVehicle(req, res){
-    try{
+async function httpAddNewVehicle(req, res) {
+    try {
         const vehicle = req.body;
         var createdVehicle = await addNewVehicle(vehicle);
-    
+
         return res.status(201).json(createdVehicle);
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
 
-async function httpUpdateVehicle(req, res){
-    try{
+async function httpUpdateVehicle(req, res) {
+    try {
+        const id = req.params.id;
         const vehicle = req.body;
-        var updatedVehicle = await updateVehicle(vehicle);
-    
-        return res.status(200).json(updatedVehicle);
-    }catch(Error){
+        await updateVehicle(id, vehicle);
+
+        res.redirect('../../vehicles');
+    } catch (Error) {
+        console.log(Error);
         return res.status(400).json(`${Error}`);
     }
 }
 
-async function httpDeleteVehicle(req, res){
-    try{
+async function httpGetUpdateVehicle(req, res) {
+    const id = req.params.id;
+    const data = await getById(id);
+
+    res.render('vehicles/update-vehicle', {
+        data
+    });
+}
+
+async function httpDeleteVehicle(req, res) {
+    try {
         const id = req.params.id;
         await deleteVehicle(id);
-    
+
         return res.status(200).json({
             message: 'Vehicle successfully deleted!'
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
@@ -62,5 +77,6 @@ module.exports = {
     httpAddNewVehicle,
     httpGetVehicleById,
     httpDeleteVehicle,
-    httpUpdateVehicle
+    httpUpdateVehicle,
+    httpGetUpdateVehicle
 };

@@ -23,8 +23,9 @@ async function httpLogUserIn(req, res) {
         const token = await Login(username, password);
 
         res.cookie('token', token, {httpOnly: true});
+        req.session.loggedin = true;
 
-        res.redirect('/');
+        res.redirect('../../vehicles');
     }catch(error){
         console.log(error);
     } 
@@ -33,9 +34,8 @@ async function httpLogUserIn(req, res) {
 async function httpLogUserOut(req, res) {
     try{
         res.clearCookie('token');
-        res.status(200).json({
-            message: "Logged out successfully!"
-        });
+        req.session.loggedin = false;
+        res.redirect('/');
     }catch(Error){
         return res.status(400).json(`${Error}`)
     }

@@ -1,4 +1,8 @@
 const Vehicle = require('./vehicles.mongo');
+const Service = require('../services/services.mongo');
+const { SendEmail } = require('../../helpers/email.sender');
+
+const serviceKmLimit = process.env.SERVICE_KM_LIMIT;
 
 async function getAllVehicles(){
     return await Vehicle.find({}, {
@@ -20,12 +24,26 @@ async function addNewVehicle(vehicle){
     return await Vehicle.create(vehicle);
 }
 
-async function updateVehicle(vehicle){
-    const vehicleRecord = await Service.findById(vehicle._id);
+async function updateVehicle(id, vehicle){
+    console.log('ka ardh te modeli ');
+    const vehicleRecord = await Vehicle.findById(id);
     if(!vehicleRecord)
         throw new Error(`Vehicle doesn't exist`);
 
-    return await Vehicle.findByIdAndUpdate(vehicle._id, vehicle);
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, vehicle);
+    const serviceRecord = await Service.findOne({vehicleId: id});
+
+    const emailParameters = {
+        vehicleModel: updatedVehicle.model,
+        vehicleLicensePlates: updatedVehicle.licensePlates,
+        vehicleKilometres: updatedVehicle.kilometres,
+        vehicleServiceKilometres: serviceRecord.kilometres
+    };
+
+    if(updatedVehicle.kilometres - serviceRecord.kilometres >= serviceKmLimit)
+        await SendEmail(emailParameters);
+
+    return updatedVehicle;
 }
 
 async function deleteVehicle(id){
