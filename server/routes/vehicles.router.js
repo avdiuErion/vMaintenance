@@ -9,11 +9,13 @@ const {
     httpGetVehicleById,
     httpDeleteVehicle,
     httpUpdateVehicle,
-    httpGetUpdateVehicle
+    httpGetUpdateVehicle,
+    httpGetAddVehicle
 } = require('../controllers/vehicles.controller');
 
 vehiclesRouter.get('/', httpGetAllVehicles);
 vehiclesRouter.post('/', Authorize, httpAddNewVehicle);
+vehiclesRouter.get('/add-vehicle', Authorize, httpGetAddVehicle);
 vehiclesRouter.get('/:id', Authorize, httpGetVehicleById);
 vehiclesRouter.delete('/:id', Authorize, httpDeleteVehicle);
 vehiclesRouter.put('/:id', Authorize, httpUpdateVehicle);

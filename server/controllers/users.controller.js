@@ -19,7 +19,7 @@ async function httpRegisterUser(req, res) {
 async function httpLogUserIn(req, res) {
     try{
         const { username, password } = req.body;
-
+        console.log(username, password);
         const token = await Login(username, password);
 
         res.cookie('token', token, {httpOnly: true});

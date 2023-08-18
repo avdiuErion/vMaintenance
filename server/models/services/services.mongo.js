@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const serviceSchema = new mongoose.Schema({
     kilometres: {
         type: String,
-        required: true
+        required: true,
+        default: null
     },
     oil: {
         type: Boolean,

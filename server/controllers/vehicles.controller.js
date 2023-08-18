@@ -29,9 +29,9 @@ async function httpGetVehicleById(req, res) {
 async function httpAddNewVehicle(req, res) {
     try {
         const vehicle = req.body;
-        var createdVehicle = await addNewVehicle(vehicle);
+        await addNewVehicle(vehicle);
 
-        return res.status(201).json(createdVehicle);
+        res.redirect('../../vehicles');
     } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
@@ -59,14 +59,16 @@ async function httpGetUpdateVehicle(req, res) {
     });
 }
 
+async function httpGetAddVehicle(req, res) {
+    res.render('vehicles/add-vehicle');
+}
+
 async function httpDeleteVehicle(req, res) {
     try {
         const id = req.params.id;
         await deleteVehicle(id);
 
-        return res.status(200).json({
-            message: 'Vehicle successfully deleted!'
-        });
+        res.redirect('../../vehicles?reload=true');
     } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
@@ -78,5 +80,6 @@ module.exports = {
     httpGetVehicleById,
     httpDeleteVehicle,
     httpUpdateVehicle,
-    httpGetUpdateVehicle
+    httpGetUpdateVehicle,
+    httpGetAddVehicle
 };

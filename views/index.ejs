@@ -1,29 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Slide Navbar</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-			<div class="login">
-				<form action="/users/login" method="post">
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="text" name="username" placeholder="User name" required="">
-					<input type="password" name="password" placeholder="Password" required="">
-					<button>Login</button>
-				</form>
-			</div>
+	<div class="pt-6">
+		<div class="row">
+			<form class="mx-auto col-10 col-md-8 col-lg-6" action="/users/login" method="post">
+				<!-- Email input -->
+				<div class="form-outline mb-4">
+					<input type="text" id="form2Example1" class="form-control" name="username"/>
+					<label class="form-label" for="form2Example1" name="username">Username</label>
+				</div>
 
-            <div class="signup">
-				<form action="/users/register" method="post">
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="username" placeholder="User name" required="">
-					<input type="password" name="password" placeholder="Password" required="">
-					<button>Sign up</button>
-				</form>
+				<!-- Password input -->
+				<div class="form-outline mb-4">
+					<input type="password" id="form2Example2" class="form-control" name="password"/>
+					<label class="form-label" for="form2Example2" name="password">Password</label>
+				</div>
+
+				<!-- 2 column grid layout for inline styling
+		<div class="row mb-4">
+		  <div class="col d-flex justify-content-center">
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+			  <label class="form-check-label" for="form2Example31"> Remember me </label>
 			</div>
+		  </div>
+	  
+		  <div class="col">
+			<a href="#!">Forgot password?</a>
+		  </div>
+		</div> -->
+
+				<!-- Submit button -->
+				<button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+				<!-- Register buttons -->
+				<!-- <div class="text-center">
+		  <p>Not a member? <a href="#!">Register</a></p>
+		  <p>or sign up with:</p>
+		  <button type="button" class="btn btn-link btn-floating mx-1">
+			<i class="fab fa-facebook-f"></i>
+		  </button>
+	  
+		  <button type="button" class="btn btn-link btn-floating mx-1">
+			<i class="fab fa-google"></i>
+		  </button>
+	  
+		  <button type="button" class="btn btn-link btn-floating mx-1">
+			<i class="fab fa-twitter"></i>
+		  </button>
+	  
+		  <button type="button" class="btn btn-link btn-floating mx-1">
+			<i class="fab fa-github"></i>
+		  </button>
+		</div> -->
+			</form>
 	</div>
-</body>
-</html>
+	</div>
+	

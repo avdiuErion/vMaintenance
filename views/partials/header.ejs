@@ -1,31 +1,31 @@
-    <!-- <a href="/" class="header__logo">Admin Panel</a> -->
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">Navbar</a>
-            <%if (!locals.session.loggedin) { %>
-                <li><a href="/">Sign in</a></li>
-                <li><a href="/">Sign Up</a></li>
-                <% }else{ %>
+<nav class="navbar navbar-expand navbar bg-light">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">vMaintenance</a>
+                </li>
+                <%if (locals.session.loggedin) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vehicles">Automjetet</a>
+                </li>
+                <%}%>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                <%if (!locals.session.loggedin) { %>
+                    <button type="button" class="btn btn-link px-3 me-2">
+                        Login
+                    </button>
+                    <% }else{ %>
                         <form action="/users/logout?_method=GET" class="d-flex">
-                            <button class="btn btn-outline-success" type="submit">Log out</button>
+                            <button type="submit" class="btn btn-dark me-3">
+                                Log out
+                            </button>
                         </form>
-                    <%}%>
+                        <%}%>
+
+            </div>
         </div>
-      </nav>
-    <!-- <nav class="header__nav">
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <%if (!locals.session.loggedin) { %>
-                <li><a href="/">Sign in</a></li>
-                <li><a href="/">Sign Up</a></li>
-                <% }else{ %>
-                    <div class="header_button">
-                        <form action="/users/logout?_method=GET">
-                            <button type="submit" class="logout">Log out</button>
-                        </form>
-                    </div>
-                    <%}%>
-        </ul>
-    </nav> -->
+    </div>
+</nav>
