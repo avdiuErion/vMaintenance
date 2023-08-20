@@ -13,18 +13,20 @@ header{
     footer{
         position: relative;
     }
+    .add-button{
+        padding-bottom: 2%;
+        text-align: left;
+    }
 }
 
-.table-responsive {
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
+@media (min-width: 768px) {
+    .add-button{
+        text-align: end;
+    }
 }
+
 .main{
     padding-top: 2rem;
-}
-
-.add-vehicle-button{
-    text-align: end;
 }
 
 .add-vehicle{
