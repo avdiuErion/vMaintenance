@@ -1,0 +1,49 @@
+<div class="admin-title">
+    <a href="/services/GetByVehicleId/<%= vehicleId %>">
+        <button type="button" class="btn btn-primary add-vehicle">&larr;Kthehu</button>
+    </a>
+</div>
+
+<div class="add-vehicle">
+    <h2 style="padding-bottom: 1%;">Shto servis të ri</h2>
+    <form action="/services/<%= vehicleId %>" method="post">
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Kilometrat</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="kilometres">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="oil" class="col-sm-2 col-form-label">Vaji</label>
+            <div class="col-sm-6">
+                <input type="checkbox" id="oil" name="oil" value="true">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="oilFilter" class="col-sm-2 col-form-label">Filteri i vajit</label>
+            <div class="col-sm-6">
+                <input type="checkbox" id="oilFilter" name="oilFilter" value="true">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fuelFilter" class="col-sm-2 col-form-label">Filterat e naftes</label>
+            <div class="col-sm-6">
+                <input type="checkbox" id="fuelFilter" name="fuelFilter" value="true">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="airFilter" class="col-sm-2 col-form-label">Filterat e ajrit</label>
+            <div class="col-sm-6">
+                <input type="checkbox" id="airFilter" name="airFilter" value="true">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Shënime</label>
+            <div class="col-sm-6">
+                <textarea type="text" class="form-control" id="colFormLabel" name="notes" rows="4" cols="50"></textarea> 
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success add-vehicle">Shto</button>
+</div>
+</form>
+</div>

@@ -9,18 +9,22 @@ const serviceSchema = new mongoose.Schema({
     oil: {
         type: Boolean,
         required: true,
+        default: false
     },
     oilFilter: {
         type: Boolean,
         required: true,
+        default: false
     },
     fuelFilter: {
         type: Boolean,
         required: true,
+        default: false
     },
     airFilter: {
         type: Boolean,
         required: true,
+        default: false
     },
     notes: {
         type: String,

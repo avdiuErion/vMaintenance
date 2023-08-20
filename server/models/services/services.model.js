@@ -16,12 +16,12 @@ async function addNewService(service){
     return await Service.create(service);
 }
 
-async function updateService(service){
-    const serviceRecord = await Service.findById(service._id);
+async function updateService(id, service){
+    const serviceRecord = await Service.findById(id);
     if(!serviceRecord)
         throw new Error(`Service doesn't exist`);
 
-    return await Service.findByIdAndUpdate(service._id, service);
+    return await Service.findByIdAndUpdate(id, service);
 }
 
 async function deleteService(id){

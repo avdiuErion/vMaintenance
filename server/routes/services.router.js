@@ -8,13 +8,17 @@ const {
     httpAddNewService,
     httpGetServiceById,
     httpDeleteService,
-    httpUpdateService
+    httpUpdateService,
+    httpGetAddService,
+    httpGetUpdateService
 } = require('../controllers/services.controller');
 
 servicesRouter.get('/GetByVehicleId/:vehicleId', Authorize, httpGetAllServicesByVehicleId);
-servicesRouter.post('/', Authorize, httpAddNewService);
+servicesRouter.post('/:vehicleId', Authorize, httpAddNewService);
+servicesRouter.get('/:vehicleId/add-service', Authorize, httpGetAddService);
 servicesRouter.get('/:id', Authorize, httpGetServiceById);
 servicesRouter.delete('/:id', Authorize, httpDeleteService);
-servicesRouter.put('/', Authorize, httpUpdateService);
+servicesRouter.put('/:id', Authorize, httpUpdateService);
+servicesRouter.get('/update-service/:id', Authorize, httpGetUpdateService);
 
 module.exports = servicesRouter;

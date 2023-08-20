@@ -81,5 +81,6 @@ module.exports = {
     httpDeleteVehicle,
     httpUpdateVehicle,
     httpGetUpdateVehicle,
-    httpGetAddVehicle
+    httpGetAddVehicle,
+    httpGetUpdateVehicle
 };

@@ -1,0 +1,93 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>Serviset</h2>
+                    </div>
+                    <div class="col-sm-4 add-vehicle-button">
+                        <a href="/services/<%= vehicleId %>/add-service">
+                            <button type="button" class="btn btn-primary">Shto</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Data e servisimit</th>
+                        <th>Kilometrat</th>
+                        <th>Vaji</th>
+                        <th>Filteri i vajit</th>
+                        <th>Filterat e naftës</th>
+                        <th>Filterat e ajrit</th>
+                        <th>Shënime</th>
+                        <th>Veprime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach((element, index)=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%= index+1 %>
+                            </th>
+                            <td>
+                                <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                            </td>
+                            <td>
+                                <%= element.kilometres %>
+                            </td>
+                            <td>
+                                <%= element.oil === true ? 'Po' : 'Jo' %>
+                            </td>
+                            <td>
+                                <%= element.oilFilter === true ? 'Po' : 'Jo'  %>
+                            </td>
+                            <td>
+                                <%= element.fuelFilter === true ? 'Po' : 'Jo'  %>
+                            </td>
+                            <td>
+                                <%= element.airFilter === true ? 'Po' : 'Jo'  %>
+                            </td>
+                            <td>
+                                <%= element.notes %>
+                            </td>
+                            <td>
+                                <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
+                                <a href="/services/update-service/<%= element._id %>" class="edit" title="Edit"
+                                    data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                <a href="#" class="delete delete-link" title="Delete" data-toggle="tooltip"
+                                    data-id="<%= element._id %>"><i class="material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.delete-link').click(function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            const itemId = $(this).data('id');
+            if (confirm('A jeni i sigurte qe doni ta fshini?')) {
+                $.ajax({
+                    url: `/services/${itemId}`,
+                    type: 'DELETE',
+                    success: function () {
+                        // Reload the page
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    });
+</script>
