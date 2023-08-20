@@ -13,7 +13,7 @@ const {
     httpGetAddVehicle
 } = require('../controllers/vehicles.controller');
 
-vehiclesRouter.get('/', httpGetAllVehicles);
+vehiclesRouter.get('/', Authorize, httpGetAllVehicles);
 vehiclesRouter.post('/', Authorize, httpAddNewVehicle);
 vehiclesRouter.get('/add-vehicle', Authorize, httpGetAddVehicle);
 vehiclesRouter.get('/:id', Authorize, httpGetVehicleById);
