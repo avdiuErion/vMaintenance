@@ -29,8 +29,10 @@ async function updateVehicle(id, vehicle){
     if(!vehicleRecord)
         throw new Error(`Vehicle doesn't exist`);
 
-    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, vehicle);
+    await Vehicle.findByIdAndUpdate(id, vehicle);
+    
     const serviceRecord = await Service.findOne({vehicleId: id});
+    const updatedVehicle = await Vehicle.findById(id);
 
     let serviceKilometres = 0;
 
