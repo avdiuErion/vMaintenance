@@ -1,11 +1,11 @@
-const Vehicle = require('./vehicles.mongo');
-const Service = require('../services/services.mongo');
+const Vehicle = require('./vehicles.model');
+const Service = require('../services/services.model');
 const { SendEmail } = require('../../helpers/email.sender');
 
 const serviceKmLimit = process.env.SERVICE_KM_LIMIT;
 
-async function getAllVehicles(){
-    return await Vehicle.find({}, {
+async function getAllVehicles(userId){
+    return await Vehicle.find({userId: userId}, {
         '__v': 0
     });
 }
@@ -14,11 +14,12 @@ async function getById(id){
     return await Vehicle.findById(id);
 }
 
-async function addNewVehicle(vehicle){
+async function addNewVehicle(vehicle, userId){
     if(await existsVehicle(vehicle.licensePlates)){
         throw new Error('Vehicle already exists!')
     }
 
+    vehicle.userId = userId;
     vehicle.createdAt = Date.now();
 
     return await Vehicle.create(vehicle);

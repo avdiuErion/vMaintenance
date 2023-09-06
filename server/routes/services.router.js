@@ -11,7 +11,7 @@ const {
     httpUpdateService,
     httpGetAddService,
     httpGetUpdateService
-} = require('../controllers/services.controller');
+} = require('../apis/services/services.controller');
 
 servicesRouter.get('/GetByVehicleId/:vehicleId', Authorize, httpGetAllServicesByVehicleId);
 servicesRouter.post('/:vehicleId', Authorize, httpAddNewService);

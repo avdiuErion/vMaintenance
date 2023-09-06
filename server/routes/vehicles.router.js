@@ -11,7 +11,7 @@ const {
     httpUpdateVehicle,
     httpGetUpdateVehicle,
     httpGetAddVehicle
-} = require('../controllers/vehicles.controller');
+} = require('../apis/vehicles/vehicles.controller');
 
 vehiclesRouter.get('/', Authorize, httpGetAllVehicles);
 vehiclesRouter.post('/', Authorize, httpAddNewVehicle);

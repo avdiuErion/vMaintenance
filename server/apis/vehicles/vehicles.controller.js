@@ -1,8 +1,11 @@
-const { getAllVehicles, addNewVehicle, getById, updateVehicle, deleteVehicle } = require('../models/vehicles/vehicles.model');
+const { getAllVehicles, addNewVehicle, getById, updateVehicle, deleteVehicle } = require('./vehicles.service');
+const { GetUserIdFromToken } = require('../users/users.service');
 
 async function httpGetAllVehicles(req, res) {
     try {
-        const data = await getAllVehicles();
+        const userId = await GetUserIdFromToken(req.cookies.token);
+
+        const data = await getAllVehicles(userId);
 
         res.render('vehicles/vehicles', {
             data
@@ -28,8 +31,9 @@ async function httpGetVehicleById(req, res) {
 
 async function httpAddNewVehicle(req, res) {
     try {
+        const userId = await GetUserIdFromToken(req.cookies.token);
         const vehicle = req.body;
-        await addNewVehicle(vehicle);
+        await addNewVehicle(vehicle, userId);
 
         res.redirect('../../vehicles');
     } catch (Error) {

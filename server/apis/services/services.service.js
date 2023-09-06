@@ -1,4 +1,4 @@
-const Service = require('./services.mongo');
+const Service = require('./services.model');
 
 async function getAllServicesByVehicleId(vehicleId){
     return await Service.find({vehicleId: vehicleId}, {

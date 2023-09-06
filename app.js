@@ -43,7 +43,7 @@ app.use(expressLayout);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
-app.use('/', api);
+app.use(api);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

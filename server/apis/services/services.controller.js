@@ -1,4 +1,4 @@
-const { getAllServicesByVehicleId, addNewService, getById, updateService, deleteService } = require('../models/services/services.model');
+const { getAllServicesByVehicleId, addNewService, getById, updateService, deleteService } = require('./services.service');
 
 async function httpGetAllServicesByVehicleId(req, res){
     try{

@@ -10,9 +10,23 @@ api.use('/vehicles', vehiclesRouter);
 api.use('/services', servicesRouter);
 api.use('/users', usersRouter);
 
-api.get('', async (req, res) => {
+api.get('/', async (req, res) => {
     try{
-        res.render('index');
+        const data = '';
+        res.render('index' , {
+            data
+        });
+    }catch(error){
+        console.log(error);
+    }
+});
+
+api.get('/register', async (req, res) => {
+    try{
+        const data = '';
+        res.render('register' , {
+            data
+        });
     }catch(error){
         console.log(error);
     }

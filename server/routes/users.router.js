@@ -6,11 +6,15 @@ const usersRouter = express.Router();
 const {
     httpRegisterUser,
     httpLogUserIn,
-    httpLogUserOut
-} = require('../controllers/users.controller');
+    httpLogUserOut,
+    httpGetAllUsers,
+    httpDeleteUser
+} = require('../apis/users/users.controller');
 
 usersRouter.post('/register', httpRegisterUser);
 usersRouter.post('/login', httpLogUserIn);
 usersRouter.get('/logout', Authorize, httpLogUserOut);
+usersRouter.get('/', Authorize, httpGetAllUsers);
+usersRouter.delete('/:id', Authorize, httpDeleteUser);
 
 module.exports = usersRouter;
