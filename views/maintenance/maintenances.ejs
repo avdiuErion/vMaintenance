@@ -4,10 +4,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2>Serviset</h2>
+                        <h2>Servisimet</h2>
                     </div>
                     <div class="col-sm-4 add-button">
-                        <a href="/services/<%= vehicleId %>/add-service">
+                        <a href="/maintenances/<%= vehicleId %>/add-maintenance">
                             <button type="button" class="btn btn-primary">Shto</button>
                         </a>
                     </div>
@@ -18,12 +18,11 @@
                     <tr>
                         <th>#</th>
                         <th>Data e servisimit</th>
-                        <th>Kilometrat</th>
-                        <th>Vaji</th>
-                        <th>Filteri i vajit</th>
-                        <th>Filterat e naftës</th>
-                        <th>Filterat e ajrit</th>
+                        <th>Titulli</th>
                         <th>Shënime</th>
+                        <th>Pagesa</th>
+                        <th>Punëkryesi</th>
+                        <th>Kontakti i punëkryesit</th>
                         <th>Veprime</th>
                     </tr>
                 </thead>
@@ -37,31 +36,27 @@
                                 <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                             </td>
                             <td>
-                                <%= element.kilometres %>
-                            </td>
-                            <td>
-                                <%= element.oil === true ? 'Po' : 'Jo' %>
-                            </td>
-                            <td>
-                                <%= element.oilFilter === true ? 'Po' : 'Jo'  %>
-                            </td>
-                            <td>
-                                <%= element.fuelFilter === true ? 'Po' : 'Jo'  %>
-                            </td>
-                            <td>
-                                <%= element.airFilter === true ? 'Po' : 'Jo'  %>
+                                <%= element.title %>
                             </td>
                             <td>
                                 <%= element.notes %>
                             </td>
                             <td>
+                                <%= element.price %>
+                            </td>
+                            <td>
+                                <%= element.contractor %>
+                            </td>
+                            <td>
+                                <%= element.contractorContact %>
+                            </td>
+                            <td>
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
-                                <a href="/services/update-service/<%= element._id %>" class="edit" title="Edito"
+                                <a href="/maintenances/update-maintenance/<%= element._id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <form action="/services/<%= element._id %>?_method=DELETE" method="post" id="deleteForm">
-                                    <a href="#" class="delete" onclick="myFunction()" title="Fshij" data-toggle="tooltip"
-                                       data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i>
-                                    </a>
+                                <form action="/maintenances/<%= element._id %>?_method=DELETE" method="post" id="deleteForm">
+                                <a href="#" class="delete" onclick="myFunction()" title="Fshij" data-toggle="tooltip"
+                                    data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
                                 </form>
                             </td>
                         </tr>

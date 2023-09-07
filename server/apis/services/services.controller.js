@@ -87,10 +87,12 @@ async function httpDeleteService(req, res){
     try{
         const id = req.params.id;
 
-        await deleteService(id);
-    
-        return res.status(200).json({
-            message: 'Service successfully deleted!'
+        const vehicleId = await deleteService(id);
+        const data = await getAllServicesByVehicleId(vehicleId);
+
+        res.render('services/services', {
+            data,
+            vehicleId
         });
     }catch(Error){
         return res.status(400).json(`${Error}`);

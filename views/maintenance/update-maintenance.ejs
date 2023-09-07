@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-2">
+        <a href="/maintenances/byVId/<%= data.vehicleId %>">
+            <button type="button" class="btn btn-primary add-vehicle">&larr;Kthehu</button>
+        </a>
+    </div>
+    <div class="col-md-2" style="padding-top: 1.5%;">
+        <form action="/maintenances/<%= data._id %>?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-danger">Fshij</button>
+        </form>
+</div>
+
+
+</div>
+
+<div class="add-vehicle">
+    <h2 style="padding-bottom: 1%;">Edito servisimin</h2>
+    <form action="/maintenances/<%= data._id %>?_method=PUT" method="post">
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Titulli</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="title"  value="<%= data.title %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="notes" class="col-sm-2 col-form-label">Shënime</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="notes"  value="<%= data.notes %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="price" class="col-sm-2 col-form-label">Pagesa</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="price"  value="<%= data.price %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="contractor" class="col-sm-2 col-form-label">Punëkryesi</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="contractor"  value="<%= data.contractor %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="contractorContact" class="col-sm-2 col-form-label">Kontakti i punëkryesit</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="colFormLabel" name="contractorContact"  value="<%= data.contractorContact %>">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success add-vehicle">Edito</button>
+</div>
+</form>
+</div>

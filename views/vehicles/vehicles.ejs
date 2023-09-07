@@ -39,12 +39,16 @@
                 <%= element.kilometres %>
               </td>
               <td>
-                <a href="services/GetByVehicleId/<%= element._id %>" class="edit" title="Serviset" data-toggle="tooltip"><i
-                  class="material-icons" style="color: green;">&#xf049;</i></a>
-                <a href="vehicles/update-vehicle/<%= element._id %>" class="edit" title="Edit" data-toggle="tooltip"><i
+                <a href="services/GetByVehicleId/<%= element._id %>" class="edit" title="Serviset"
+                  data-toggle="tooltip"><i class="material-icons" style="color: green;">&#xf049;</i></a>
+                <a href="maintenances/byVId/<%= element._id %>" class="edit" title="Servisimet" data-toggle="tooltip"><i
+                    class="material-icons" style="color: bluegreen;">&#xea56;</i></a>
+                <a href="vehicles/update-vehicle/<%= element._id %>" class="edit" title="Edito" data-toggle="tooltip"><i
                     class="material-icons">&#xE254;</i></a>
-                <a href="#" class="delete delete-link" title="Delete" data-toggle="tooltip"
-                  data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
+                <form action="vehicles/<%= element._id %>?_method=DELETE" method="post" id="deleteForm">
+                  <a href="#" class="delete" onclick="myFunction()" title="Fshij" data-toggle="tooltip"
+                    data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
+                </form>
               </td>
             </tr>
             <% }) %>
@@ -55,24 +59,7 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-    $('.delete-link').click(function (event) {
-      event.preventDefault(); // Prevent default link behavior
-
-      const itemId = $(this).data('id');
-      if (confirm('A jeni i sigurte qe doni ta fshini?')) {
-        $.ajax({
-          url: `/vehicles/${itemId}`,
-          type: 'DELETE',
-          success: function () {
-            // Reload the page
-            window.location.reload();
-          },
-          error: function (error) {
-            console.error(error);
-          }
-        });
-      }
-    });
-  });
+  function myFunction() {
+    document.getElementById("deleteForm").submit();
+  }
 </script>

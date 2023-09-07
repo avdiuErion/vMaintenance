@@ -28,8 +28,10 @@
                 </td>
                 <td>
                   <% if (element.username != 'admin') { %>
-                    <a href="#" class="delete delete-link" title="Delete" data-toggle="tooltip"
-                    data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
+                    <form action="/users/<%= element._id %>?_method=DELETE" method="post" id="deleteForm">
+                      <a href="#" class="delete" onclick="myFunction()" title="Fshij" data-toggle="tooltip"
+                          data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
+                      </form>
                   <% } %>
                 </td>
               </tr>
@@ -41,24 +43,7 @@
   </div>
   
   <script>
-    $(document).ready(function () {
-      $('.delete-link').click(function (event) {
-        event.preventDefault(); // Prevent default link behavior
-  
-        const itemId = $(this).data('id');
-        if (confirm('A jeni i sigurte qe doni ta fshini?')) {
-          $.ajax({
-            url: `/users/${itemId}`,
-            type: 'DELETE',
-            success: function () {
-              // Reload the page
-              window.location.reload();
-            },
-            error: function (error) {
-              console.error(error);
-            }
-          });
-        }
-      });
-    });
-  </script>
+    function myFunction() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>

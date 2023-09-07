@@ -3,12 +3,14 @@ const express = require('express');
 const vehiclesRouter = require('./vehicles.router');
 const servicesRouter = require('./services.router');
 const usersRouter = require('./users.router');
+const maintenacesRouter = require('./maintenances.router');
 
 const api = express.Router();
 
 api.use('/vehicles', vehiclesRouter);
 api.use('/services', servicesRouter);
 api.use('/users', usersRouter);
+api.use('/maintenances', maintenacesRouter);
 
 api.get('/', async (req, res) => {
     try{
