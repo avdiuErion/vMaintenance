@@ -90,14 +90,9 @@ async function httpGetUpdateMaintenance(req, res) {
 async function httpDeleteMaintenance(req, res){
     try{
         const id = req.params.id;
-
-        const vehicleId = await deleteMaintenance(id);
-        const data = await getAllMaintenancesByVehicleId(vehicleId);
-    
-        res.render('maintenance/maintenances', {
-            data,
-            vehicleId
-        });
+        await deleteMaintenance(id);
+        
+        res.status(200).json({ message: 'Maintenance deleted' });
     }catch(Error){
         return res.status(400).json(`${Error}`);
     }

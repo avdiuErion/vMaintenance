@@ -29,9 +29,7 @@ async function deleteService(id){
     if(!service)
         throw new Error(`Service doesn't exist`);
 
-    await Service.findByIdAndDelete(id);
-
-    return service.vehicleId;
+    return await Service.findByIdAndDelete(id);
 }
 
 module.exports = {

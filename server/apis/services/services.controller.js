@@ -86,14 +86,10 @@ async function httpGetUpdateService(req, res) {
 async function httpDeleteService(req, res){
     try{
         const id = req.params.id;
+        await deleteService(id);
 
-        const vehicleId = await deleteService(id);
-        const data = await getAllServicesByVehicleId(vehicleId);
+        res.status(200).json({ message: 'Service deleted' });
 
-        res.render('services/services', {
-            data,
-            vehicleId
-        });
     }catch(Error){
         return res.status(400).json(`${Error}`);
     }

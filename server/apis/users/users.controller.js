@@ -79,7 +79,7 @@ async function httpDeleteUser(req, res) {
         const id = req.params.id;
         await DeleteUser(id);
 
-        res.redirect('../../users?reload=true');
+        res.status(200).json({ message: 'User deleted' });
     } catch (Error) {
         return res.status(400).json(`${Error}`);
     }

@@ -28,10 +28,8 @@
                 </td>
                 <td>
                   <% if (element.username != 'admin') { %>
-                    <form action="/users/<%= element._id %>?_method=DELETE" method="post" id="deleteForm">
-                      <a href="#" class="delete" onclick="myFunction()" title="Fshij" data-toggle="tooltip"
+                      <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
                           data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
-                      </form>
                   <% } %>
                 </td>
               </tr>
@@ -43,7 +41,13 @@
   </div>
   
   <script>
-    function myFunction() {
-        document.getElementById("deleteForm").submit();
+    function myFunction(elementId) {
+      $.ajax({
+              url:'/users/' + elementId,
+              type:"DELETE",
+              success: function(response) {
+                window.location.href = '/users';
+              }
+          });
     }
-</script>
+  </script>

@@ -54,7 +54,7 @@ async function updateVehicle(id, vehicle){
 }
 
 async function deleteVehicle(id){
-    const vehicle = Vehicle.findById(id);
+    const vehicle = await Vehicle.findById(id);
     if(!vehicle){
         throw new Error(`Vehicle doesn't exist`);
     }

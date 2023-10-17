@@ -4,7 +4,7 @@ const { GetUserIdFromToken } = require('../users/users.service');
 async function httpGetAllVehicles(req, res) {
     try {
         const userId = await GetUserIdFromToken(req.cookies.token);
-
+        
         const data = await getAllVehicles(userId);
 
         res.render('vehicles/vehicles', {
@@ -72,7 +72,7 @@ async function httpDeleteVehicle(req, res) {
         const id = req.params.id;
         await deleteVehicle(id);
 
-        res.redirect('../../vehicles?reload=true');
+        res.status(200).json({ message: 'Vehicle deleted' });
     } catch (Error) {
         return res.status(400).json(`${Error}`);
     }

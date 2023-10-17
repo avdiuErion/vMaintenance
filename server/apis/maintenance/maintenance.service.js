@@ -29,9 +29,7 @@ async function deleteMaintenance(id){
     if(!maintenance)
         throw new Error(`Maintenance doesn't exist`);
 
-    await Maintenance.findByIdAndDelete(id);
-
-    return maintenance.vehicleId;
+    return await Maintenance.findByIdAndDelete(id);
 }
 
 module.exports = {
