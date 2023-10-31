@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-2">
         <a href="/services/GetByVehicleId/<%= data.vehicleId %>">
-            <button type="button" class="btn btn-primary add-vehicle">&larr;Kthehu</button>
+            <button type="button" class="btn btn-primary">&larr;Kthehu</button>
         </a>
     </div>
     <div class="col-md-2" style="padding-top: 1.5%;">
@@ -13,8 +13,8 @@
 
 </div>
 
-<div class="add-vehicle">
-    <h2 style="padding-bottom: 1%;">Edito servisin</h2>
+<div>
+    <h2 style="padding-bottom: 1%; padding-top: 1%;">Edito servisin</h2>
     <form action="/services/<%= data._id %>?_method=PUT" method="post">
         <div class="form-group row">
             <label for="colFormLabel" class="col-sm-2 col-form-label">Kilometrat</label>
@@ -53,7 +53,7 @@
                 </textarea> 
             </div>
         </div>
-        <button type="submit" class="btn btn-success add-vehicle">Edito</button>
+        <button type="submit" class="btn btn-success">Edito</button>
 </div>
 </form>
 </div>

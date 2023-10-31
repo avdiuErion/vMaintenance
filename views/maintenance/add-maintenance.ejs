@@ -1,11 +1,11 @@
 <div class="admin-title">
     <a href="/maintenances/byVId/<%= vehicleId %>">
-        <button type="button" class="btn btn-primary add-vehicle">&larr;Kthehu</button>
+        <button type="button" class="btn btn-primary">&larr;Kthehu</button>
     </a>
 </div>
 
-<div class="add-vehicle">
-    <h2 style="padding-bottom: 1%;">Shto servisim të ri</h2>
+<div>
+    <h2 style="padding-bottom: 1%; padding-top: 1%;">Shto servisim të ri</h2>
     <form action="/maintenances/<%= vehicleId %>" method="post">
         <div class="form-group row">
             <label for="colFormLabel" class="col-sm-2 col-form-label">Titulli</label>
@@ -37,7 +37,7 @@
                 <input type="text" class="form-control" id="colFormLabel" name="contractorContact">
             </div>
         </div>
-        <button type="submit" class="btn btn-success add-vehicle">Shto</button>
+        <button type="submit" class="btn btn-success">Shto</button>
 </div>
 </form>
 </div>

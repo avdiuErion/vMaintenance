@@ -1,26 +1,26 @@
 const { Register, Login, GetAllUsers, DeleteUser, GetUserIdFromToken, GetById } = require('./users.service');
 
 async function httpRegisterUser(req, res) {
-    try{
+    try {
         const { username, password, confirmPassword } = req.body;
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             const data = 'Password is not the same in both fields!'
-            res.render('../register', {
+            res.render('register', {
                 data
             });
+        }else{
+            await Register(username, password);
+
+            const data = 'Regjistrimi u krye me sukses!'
+            res.redirect('/');
         }
-
-        await Register(username, password);
-
-        const data = 'Regjistrimi u krye me sukses!'
-        res.redirect('/');
-    }catch(Error){
+    } catch (Error) {
         if (Error.code === 11000) {
             res.status(409).json({ message: 'User already in use' });
         }
         res.status(500).json({ message: 'Internal server error' });
     }
-    
+
 }
 
 async function httpGetRegister(req, res) {
@@ -31,32 +31,42 @@ async function httpGetRegister(req, res) {
 }
 
 async function httpLogUserIn(req, res) {
-    try{
+    try {
         const { username, password } = req.body;
-        const token = await Login(username, password);
+        let token;
 
-        res.cookie('token', token, {httpOnly: true});
+        try {
+            token = await Login(username, password);
+        } catch (error) {
+            // Handle the error when login fails
+            res.status(401).json({ message: error.message });
+            return;
+        }
+
+        // Authentication successful
+        res.cookie('token', token, { httpOnly: true });
         req.session.loggedin = true;
 
         const isAdmin = await isUserAdmin(token);
         req.session.isAdmin = isAdmin;
 
-        if(isAdmin){
+        if (isAdmin) {
             res.redirect('../../users');
-        }else{
+        } else {
             res.redirect('../../vehicles');
         }
-    }catch(error){
+    } catch (error) {
         console.log(error);
-    } 
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }
 
 async function httpLogUserOut(req, res) {
-    try{
+    try {
         res.clearCookie('token');
         req.session.loggedin = false;
         res.redirect('/');
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`)
     }
 }
@@ -85,7 +95,7 @@ async function httpDeleteUser(req, res) {
     }
 }
 
-async function isUserAdmin(token){
+async function isUserAdmin(token) {
     const userId = await GetUserIdFromToken(token);
     const user = await GetById(userId);
 

@@ -1,4 +1,4 @@
-<div class="container-xl">
+
   <div class="table-responsive">
     <div class="table-wrapper">
       <div class="table-title">
@@ -58,6 +58,7 @@
 
 <script>
   function myFunction(elementId) {
+    if (confirm('A jeni i sigurte qe doni te fshini automjetin?')) {
     $.ajax({
             url:'/vehicles/' + elementId,
             type:"DELETE",
@@ -65,5 +66,6 @@
               window.location.href = '/vehicles';
             }
         });
+      }
   }
 </script>

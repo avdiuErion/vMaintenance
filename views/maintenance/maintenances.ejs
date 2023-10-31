@@ -33,7 +33,8 @@
                                 <%= index+1 %>
                             </th>
                             <td>
-                                <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
+                                    day: 'numeric' }) %>
                             </td>
                             <td>
                                 <%= element.title %>
@@ -54,8 +55,9 @@
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
                                 <a href="/maintenances/update-maintenance/<%= element._id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
-                                    data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
+                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
+                                    data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
+                                        style="color: red;">&#xE872;</i></a>
                             </td>
                         </tr>
                         <% }) %>
@@ -67,13 +69,15 @@
 
 <script>
     function myFunction(elementId) {
-      $.ajax({
-              url:'/maintenances/' + elementId,
-              type:"DELETE",
-              success: function(response) {
-                const vehicleId = location.pathname.split('/')[2];
-                window.location.href = '/maintenances/byVId/' + vehicleId;
-              }
-          });
+        if (confirm('A jeni i sigurte qe doni te fshini servisimin?')) {
+            $.ajax({
+                url: '/maintenances/' + elementId,
+                type: "DELETE",
+                success: function (response) {
+                    const vehicleId = location.pathname.split('/')[2];
+                    window.location.href = '/maintenances/byVId/' + vehicleId;
+                }
+            });
+        }
     }
-  </script>
+</script>

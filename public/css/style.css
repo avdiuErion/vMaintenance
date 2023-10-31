@@ -10,9 +10,6 @@ header{
 }
 
 @media (max-width: 768px) {
-    footer{
-        position: relative;
-    }
     .add-button{
         padding-bottom: 2%;
         text-align: left;
@@ -29,7 +26,7 @@ header{
     padding-top: 2rem;
 }
 
-.add-vehicle{
+/* .add-vehicle{
     margin-top: 1rem;
     padding: 2%;
-}
+} */

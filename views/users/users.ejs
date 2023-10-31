@@ -1,53 +1,54 @@
 <div class="container-xl">
-    <div class="table-responsive">
-      <div class="table-wrapper">
-        <div class="table-title">
-          <div class="row">
-            <div class="col-sm-8">
-              <h2>Përdoruesit</h2>
-            </div>
-            <div class="col-sm-4 add-button">
-            </div>
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-8">
+            <h2>Përdoruesit</h2>
+          </div>
+          <div class="col-sm-4 add-button">
           </div>
         </div>
-        <table class="table table-striped table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Emri i përdoruesit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% data.forEach((element, index)=> { %>
-              <tr>
-                <th scope="row">
-                  <%= index+1 %>
-                </th>
-                <td>
-                  <%= element.username %>
-                </td>
-                <td>
-                  <% if (element.username != 'admin') { %>
-                      <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
-                          data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
-                  <% } %>
-                </td>
-              </tr>
-              <% }) %>
-          </tbody>
-        </table>
       </div>
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Emri i përdoruesit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach((element, index)=> { %>
+            <tr>
+              <th scope="row">
+                <%= index+1 %>
+              </th>
+              <td>
+                <%= element.username %>
+              </td>
+              <td>
+                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
+                  data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
+                    style="color: red;">&#xE872;</i></a>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
     </div>
   </div>
-  
-  <script>
-    function myFunction(elementId) {
+</div>
+
+<script>
+  function myFunction(elementId) {
+    if (confirm('A jeni i sigurte qe doni te fshini perdoruesin?')) {
       $.ajax({
-              url:'/users/' + elementId,
-              type:"DELETE",
-              success: function(response) {
-                window.location.href = '/users';
-              }
-          });
+        url: '/users/' + elementId,
+        type: "DELETE",
+        success: function (response) {
+          window.location.href = '/users';
+        }
+      });
     }
-  </script>
+  }
+</script>

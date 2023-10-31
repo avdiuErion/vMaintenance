@@ -72,7 +72,7 @@
 
 <script>
     function myFunction(elementId) {
-        console.log('erdh'+elementId);
+        if (confirm('A jeni i sigurte qe doni te fshini servisin?')) {
       $.ajax({
               url:'/services/' + elementId,
               type:"DELETE",
@@ -81,5 +81,6 @@
                 window.location.href = '/services/GetByVehicleId/' + vehicleId;
               }
           });
+        }
     }
   </script>

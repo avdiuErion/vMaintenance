@@ -12,13 +12,19 @@ async function Register(username, password) {
 
 async function Login(username, password) {
     const user = await User.findOne({ username: username });
+
     if (!user) {
-        return('Invalid credentials');
+        throw new Error('Autentifikimi deshtoi. Ju lutemi shikoni kredencialet!');
+    }
+
+    if(!user.isActive){
+        throw new Error('Perdoruesi eshte jo aktiv!');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
+
     if (!isPasswordValid) {
-        return('Invalid credentials');
+        throw new Error('Autentifikimi deshtoi. Ju lutemi shikoni kredencialet!');
     }
 
     return jwt.sign({ userId: user._id }, jwtSecret);
@@ -37,18 +43,21 @@ async function GetAllUsers(userId){
         throw new Error('Not authorized to see data!');
     }
 
-    return await User.find({}, {
+    return await User.find({isActive: true, username: { $ne: 'admin' } }, {
         '__v': 0
     });
 }
 
 async function DeleteUser(id){
-    const user = User.findById(id);
+    const user = await User.findById(id);
     if(!user){
         throw new Error(`User doesn't exist`);
     }
 
-    await User.findByIdAndDelete(id);
+    user.isActive = false;
+    console.log(user);
+
+    return await User.findByIdAndUpdate(id, user);
 }
 
 async function GetById(id){
