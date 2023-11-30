@@ -11,7 +11,6 @@ async function httpRegisterUser(req, res) {
         }else{
             await Register(username, password);
 
-            const data = 'Regjistrimi u krye me sukses!'
             res.redirect('/');
         }
     } catch (Error) {

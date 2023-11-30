@@ -60,6 +60,7 @@ async function httpUpdateService(req, res){
     try{
         const id = req.params.id;
         const service = req.body;
+        console.log(service);
         var updatedService = await updateService(id, service);
         
         const vehicleId = updateService.vehicleId;
