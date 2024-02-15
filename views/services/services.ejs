@@ -1,4 +1,9 @@
 <div class="container-xl">
+    <div class="admin-title">
+        <a href="/vehicles">
+            <button type="button" class="btn btn-primary">&larr;Kthehu</button>
+        </a>
+    </div>
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -20,11 +25,11 @@
                         <th>Data e servisimit</th>
                         <th>Kilometrat</th>
                         <th>Vaji</th>
-                        <th>Filteri i vajit</th>
+<th>Filteri i vajit</th>
                         <th>Filterat e naftës</th>
                         <th>Filterat e ajrit</th>
                         <th>Shënime</th>
-                        <th>Veprime</th>
+                                                <th>Veprime</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +63,7 @@
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
                                 <a href="/services/update-service/<%= element._id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
+                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
                                        data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i>
                                     </a>
                             </td>
@@ -73,14 +78,14 @@
 <script>
     function myFunction(elementId) {
         if (confirm('A jeni i sigurte qe doni te fshini servisin?')) {
-      $.ajax({
-              url:'/services/' + elementId,
-              type:"DELETE",
-              success: function(response) {
-                const vehicleId = location.pathname.split('/')[2];
-                window.location.href = '/services/GetByVehicleId/' + vehicleId;
-              }
-          });
+            $.ajax({
+                url:'/services/' + elementId,
+                type:"DELETE",
+                success: function(response) {
+                    const vehicleId = location.pathname.split('/')[2];
+                    window.location.href = '/services/GetByVehicleId/' + vehicleId;
+                }
+            });
         }
     }
-  </script>
+</script>

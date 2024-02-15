@@ -1,4 +1,9 @@
 <div class="container-xl">
+    <div class="admin-title">
+        <a href="/vehicles">
+            <button type="button" class="btn btn-primary">&larr;Kthehu</button>
+        </a>
+    </div>
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -19,8 +24,8 @@
                         <th>#</th>
                         <th>Data e servisimit</th>
                         <th>Titulli</th>
-                        <th>Shënime</th>
-                        <th>Pagesa</th>
+                                                <th>Shënime</th>
+<th>Pagesa</th>
                         <th>Punëkryesi</th>
                         <th>Kontakti i punëkryesit</th>
                         <th>Veprime</th>
@@ -35,7 +40,7 @@
                             <td>
                                 <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
                                     day: 'numeric' }) %>
-                            </td>
+                                                        </td>
                             <td>
                                 <%= element.title %>
                             </td>
@@ -55,7 +60,7 @@
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
                                 <a href="/maintenances/update-maintenance/<%= element._id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
+                                    <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
                                     data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
                                         style="color: red;">&#xE872;</i></a>
                             </td>
@@ -70,14 +75,14 @@
 <script>
     function myFunction(elementId) {
         if (confirm('A jeni i sigurte qe doni te fshini servisimin?')) {
-            $.ajax({
-                url: '/maintenances/' + elementId,
-                type: "DELETE",
-                success: function (response) {
-                    const vehicleId = location.pathname.split('/')[2];
-                    window.location.href = '/maintenances/byVId/' + vehicleId;
-                }
-            });
+      $.ajax({
+              url: '/maintenances/' + elementId,
+              type: "DELETE",
+              success: function (response) {
+                const vehicleId = location.pathname.split('/')[2];
+                window.location.href = '/maintenances/byVId/' + vehicleId;
+              }
+          });
         }
     }
-</script>
+  </script>
