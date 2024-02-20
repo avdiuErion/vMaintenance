@@ -1,49 +1,52 @@
 const { getAllServicesByVehicleId, addNewService, getById, updateService, deleteService } = require('./services.service');
+const vehicleService = require('../vehicles/vehicles.service');
 
-async function httpGetAllServicesByVehicleId(req, res){
-    try{
+async function httpGetAllServicesByVehicleId(req, res) {
+    try {
         const vehicleId = req.params.vehicleId;
         const data = await getAllServicesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(vehicleId);
 
         res.render('services/services', {
             data,
-            vehicleId
+            vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
 
-async function httpGetServiceById(req, res){
-    try{
+async function httpGetServiceById(req, res) {
+    try {
         const id = req.params.id;
         const service = await getById(id);
-    
-        if(service)
+
+        if (service)
             return res.status(200).json(service);
 
         return res.status(404).json();
 
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
-    } 
+    }
 }
 
-async function httpAddNewService(req, res){
-    try{
+async function httpAddNewService(req, res) {
+    try {
         const vehicleId = req.params.vehicleId;
         const service = req.body;
         service.vehicleId = vehicleId;
 
         await addNewService(service);
-    
+
         const data = await getAllServicesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(vehicleId);
 
         res.render('services/services', {
             data,
-            vehicleId
+            vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
@@ -56,21 +59,21 @@ async function httpGetAddService(req, res) {
     });
 }
 
-async function httpUpdateService(req, res){
-    try{
+async function httpUpdateService(req, res) {
+    try {
         const id = req.params.id;
         const service = req.body;
-        console.log(service);
         var updatedService = await updateService(id, service);
-        
+
         const vehicleId = updateService.vehicleId;
-        const data = await getAllServicesByVehicleId(updatedService.vehicleId);
+        const data = await getAllServicesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(vehicleId);
 
         res.render('services/services', {
             data,
-            vehicleId
+            vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
@@ -84,14 +87,14 @@ async function httpGetUpdateService(req, res) {
     });
 }
 
-async function httpDeleteService(req, res){
-    try{
+async function httpDeleteService(req, res) {
+    try {
         const id = req.params.id;
         await deleteService(id);
 
         res.status(200).json({ message: 'Service deleted' });
 
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }

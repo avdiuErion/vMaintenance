@@ -9,23 +9,23 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h2>Servisimet</h2>
+                        <h2>Mirëmbajtje - <span class="vehicleLiteInfo"><%=vehicle.model%> | <%=vehicle.licensePlates%></span></h2>
                     </div>
                     <div class="col-sm-4 add-button">
-                        <a href="/maintenances/<%= vehicleId %>/add-maintenance">
+                        <a href="/maintenances/<%= vehicle._id %>/add-maintenance">
                             <button type="button" class="btn btn-primary">Shto</button>
                         </a>
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover table-bordered">
+            <table class="table table-striped table-hover table-bordered mainTable">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Data e servisimit</th>
+                        <th>Përfunduar në</th>
                         <th>Titulli</th>
-                                                <th>Shënime</th>
-<th>Pagesa</th>
+                        <th>Shënime</th>
+                        <th>Pagesa</th>
                         <th>Punëkryesi</th>
                         <th>Kontakti i punëkryesit</th>
                         <th>Veprime</th>
@@ -40,7 +40,7 @@
                             <td>
                                 <%= element.createdAt.toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
                                     day: 'numeric' }) %>
-                                                        </td>
+                            </td>
                             <td>
                                 <%= element.title %>
                             </td>
@@ -60,7 +60,7 @@
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
                                 <a href="/maintenances/update-maintenance/<%= element._id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
+                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
                                     data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
                                         style="color: red;">&#xE872;</i></a>
                             </td>
@@ -74,15 +74,15 @@
 
 <script>
     function myFunction(elementId) {
-        if (confirm('A jeni i sigurte qe doni te fshini servisimin?')) {
-      $.ajax({
-              url: '/maintenances/' + elementId,
-              type: "DELETE",
-              success: function (response) {
-                const vehicleId = location.pathname.split('/')[2];
-                window.location.href = '/maintenances/byVId/' + vehicleId;
-              }
-          });
+        if (confirm('A jeni i sigurte qe doni te fshini mirëmbajtjen?')) {
+            $.ajax({
+                url: '/maintenances/' + elementId,
+                type: "DELETE",
+                success: function (response) {
+                    const vehicleId = location.pathname.split('/')[2] == 'byVId' ? location.pathname.split('/')[3] : location.pathname.split('/')[2];
+                    window.location.href = '/maintenances/byVId/' + vehicleId;
+                }
+            });
         }
     }
-  </script>
+</script>

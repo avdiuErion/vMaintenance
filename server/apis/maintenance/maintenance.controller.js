@@ -4,14 +4,16 @@ const { getAllMaintenancesByVehicleId,
     updateMaintenance,
     deleteMaintenance } = require('./maintenance.service');
 
+const vehicleService = require('../vehicles/vehicles.service');
+
 async function httpGetAllMaintenancesByVehicleId(req, res){
     try{
-        const vehicleId = req.params.vehicleId;
-        const data = await getAllMaintenancesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(req.params.vehicleId);
+        const data = await getAllMaintenancesByVehicleId(vehicle._id);
 
         res.render('maintenance/maintenances', {
             data,
-            vehicleId
+            vehicle
         });
     }catch(Error){
         return res.status(400).json(`${Error}`);
@@ -42,10 +44,11 @@ async function httpAddNewMaintenance(req, res){
         await addNewMaintenance(maintenace);
     
         const data = await getAllMaintenancesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(vehicleId);
 
         res.render('maintenance/maintenances', {
             data,
-            vehicleId
+            vehicle
         });
     }catch(Error){
         return res.status(400).json(`${Error}`);
@@ -67,11 +70,12 @@ async function httpUpdateMaintenance(req, res){
         var updatedMaintenance = await updateMaintenance(id, maintenace);
         
         const vehicleId = updatedMaintenance.vehicleId;
-        const data = await getAllMaintenancesByVehicleId(updatedMaintenance.vehicleId);
+        const data = await getAllMaintenancesByVehicleId(vehicleId);
+        const vehicle = await vehicleService.getById(vehicleId);
 
         res.render('maintenance/maintenances', {
             data,
-            vehicleId
+            vehicle
         });
     }catch(Error){
         return res.status(400).json(`${Error}`);

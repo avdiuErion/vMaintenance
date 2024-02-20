@@ -1,34 +1,51 @@
-header{
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+header {
+    min-height:50px;
     padding-bottom: 1rem;
 }
 
 .footer {
-    position: absolute !important;
-    bottom: 0;
-    width: 100%;
+    min-height:50px;
     text-align: center;
 }
 
+.main {
+    padding-top: 2rem;
+}
+
+.admin-title {
+    padding-bottom: 1%;
+}
+
+.vehicleLiteInfo {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.mainTable{
+    margin-top: 1%;
+}
+
 @media (max-width: 768px) {
-    .add-button{
+    .add-button {
         padding-bottom: 2%;
         text-align: left;
     }
 }
 
 @media (min-width: 768px) {
-    .add-button{
+    .add-button {
         text-align: end;
     }
 }
 
-.main{
-    padding-top: 2rem;
-}
-
-.admin-title{
-    padding-bottom: 1%;
-}
 /* .add-vehicle{
     margin-top: 1rem;
     padding: 2%;
