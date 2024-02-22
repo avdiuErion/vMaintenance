@@ -65,7 +65,7 @@ async function httpUpdateService(req, res) {
         const service = req.body;
         var updatedService = await updateService(id, service);
 
-        const vehicleId = updateService.vehicleId;
+        const vehicleId = updatedService.vehicleId;
         const data = await getAllServicesByVehicleId(vehicleId);
         const vehicle = await vehicleService.getById(vehicleId);
 
