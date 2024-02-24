@@ -16,11 +16,11 @@ const {
 } = require('../apis/services/services.controller');
 
 servicesRouter.get('/GetByVehicleId/:vehicleId', Authorize, httpGetAllServicesByVehicleId);
-servicesRouter.post('/:vehicleId', Authorize, servicesBaseValidator, ValidateRequest, httpAddNewService);
+servicesRouter.post('/:vehicleId', [Authorize, servicesBaseValidator, ValidateRequest], httpAddNewService);
 servicesRouter.get('/:vehicleId/add-service', Authorize, httpGetAddService);
 servicesRouter.get('/:id', Authorize, httpGetServiceById);
 servicesRouter.delete('/:id', Authorize, httpDeleteService);
-servicesRouter.put('/:id', Authorize, httpUpdateService);
+servicesRouter.put('/:id', [Authorize, servicesBaseValidator, ValidateRequest], httpUpdateService);
 servicesRouter.get('/update-service/:id', Authorize, httpGetUpdateService);
 
 module.exports = servicesRouter;

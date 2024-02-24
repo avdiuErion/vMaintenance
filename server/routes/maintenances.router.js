@@ -1,5 +1,7 @@
 const express = require('express');
 const { Authorize } = require('../middleware/authorization.middleware');
+const ValidateRequest = require('../middleware/validation.middleware');
+const { maintenancesBaseValidator } = require('../apis/maintenance/maintenance.validator');
 
 const maintenacesRouter = express.Router();
 
@@ -18,10 +20,10 @@ maintenacesRouter.get('/:vehicleId/add-maintenance', Authorize, httpGetAddMainte
 maintenacesRouter.get('/:id', Authorize, httpGetMaintenanceById);
 maintenacesRouter.get('/update-maintenance/:id', Authorize, httpGetUpdateMaintenance);
 
-maintenacesRouter.post('/:vehicleId', Authorize, httpAddNewMaintenance);
+maintenacesRouter.post('/:vehicleId', [Authorize, maintenancesBaseValidator, ValidateRequest], httpAddNewMaintenance);
 
 maintenacesRouter.delete('/:id', Authorize, httpDeleteMaintenance);
 
-maintenacesRouter.put('/:id', Authorize, httpUpdateMaintenance);
+maintenacesRouter.put('/:id', [Authorize, maintenancesBaseValidator, ValidateRequest], httpUpdateMaintenance);
 
 module.exports = maintenacesRouter;

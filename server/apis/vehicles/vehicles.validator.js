@@ -1,6 +1,14 @@
 const { body } = require('express-validator');
 
-const servicesBaseValidator = [
+const vehiclesBaseValidator = [
+    body('model', 'Modeli duhet te plotesohet').not().isEmpty(),
+
+    body('yearOfProduction', 'Viti i prodhimit duhet te plotesohet').not().isEmpty()
+        .isInt({ min: 1900, max: new Date().getFullYear() })
+        .withMessage('Viti i prodhimit duhet te jete ndermjet 1900 dhe ' + new Date().getFullYear()),
+
+    body('licensePlates', 'Regjistrimi duhet te plotesohet').not().isEmpty(),
+
     body('kilometres', 'Kilometrat duhet te plotesohen').not().isEmpty()
         .custom(value => {
             if (typeof value !== 'undefined' && isNaN(value)) {
@@ -16,4 +24,4 @@ const servicesBaseValidator = [
         })
 ];
 
-module.exports = { servicesBaseValidator };
+module.exports = { vehiclesBaseValidator };
