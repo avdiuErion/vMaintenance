@@ -12,7 +12,7 @@
                         <h2>Mirëmbajtje - <span class="vehicleLiteInfo"><%=vehicle.model%> | <%=vehicle.licensePlates%></span></h2>
                     </div>
                     <div class="col-sm-4 add-button">
-                        <a href="/maintenances/<%= vehicle._id %>/add-maintenance">
+                        <a href="/maintenances/<%= vehicle.id %>/add-maintenance">
                             <button type="button" class="btn btn-primary">Shto</button>
                         </a>
                     </div>
@@ -58,10 +58,10 @@
                             </td>
                             <td>
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
-                                <a href="/maintenances/update-maintenance/<%= element._id %>" class="edit" title="Edito"
+                                <a href="/maintenances/update-maintenance/<%= element.id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
-                                    data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
+                                <a href="#" class="delete" onclick="myFunction('<%= element.id %>')" title="Fshij"
+                                    data-toggle="tooltip" data-id="<%= element.id %>"><i class="material-icons"
                                         style="color: red;">&#xE872;</i></a>
                             </td>
                         </tr>

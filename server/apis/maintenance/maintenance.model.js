@@ -1,37 +1,34 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../../config/db.js');
+const Vehicle = require('../vehicles/vehicles.model.js');
 
-const maintenanceSchema = new mongoose.Schema({
+const Maintenance = sequelize.define('Maintenance', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     title: {
-        type: String,
+        type: DataTypes.STRING,
         required: true
     },
     notes: {
-        type: String,
+        type: DataTypes.STRING,
         required: true
     },
     price: {
-        type: Number,
+        type: DataTypes.INTEGER,
         required: true
     },
     contractor: {
-        type: String,
+        type: DataTypes.STRING,
         required: true
     },
     contractorContact: {
-        type: String,
+        type: DataTypes.STRING,
     },
-    vehicleId:{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Vehicle',
-        required: true
-    },
-    createdAt: {
-        type: Date
-    },
-    updateAt: {
-        type: Date,
-        default: Date.now
-    }
 });
 
-module.exports = mongoose.model('Maintenance', maintenanceSchema);
+Maintenance.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+
+module.exports = Maintenance;

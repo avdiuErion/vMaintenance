@@ -1,4 +1,5 @@
 const { Register, Login, GetAllUsers, DeleteUser, GetUserIdFromToken, GetById } = require('./users.service');
+const vMaintUtility = require('../../helpers/vmaintenance.utility');
 
 async function httpRegisterUser(req, res) {
     try {
@@ -46,14 +47,7 @@ async function httpLogUserIn(req, res) {
         res.cookie('token', token, { httpOnly: true });
         req.session.loggedin = true;
 
-        const isAdmin = await isUserAdmin(token);
-        req.session.isAdmin = isAdmin;
-
-        if (isAdmin) {
-            res.redirect('../../users');
-        } else {
-            res.redirect('../../vehicles');
-        }
+        await vMaintUtility.redirectToDashboard(req, res, token, true);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' });
@@ -92,13 +86,6 @@ async function httpDeleteUser(req, res) {
     } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
-}
-
-async function isUserAdmin(token) {
-    const userId = await GetUserIdFromToken(token);
-    const user = await GetById(userId);
-
-    return user.username === 'admin';
 }
 
 module.exports = {

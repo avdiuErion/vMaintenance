@@ -12,7 +12,7 @@
                         <h2>Servisimet - <span class="vehicleLiteInfo"><%=vehicle.model%> | <%=vehicle.licensePlates%></span></h2>
                     </div>
                     <div class="col-sm-4 add-button">
-                        <a href="/services/<%= vehicle._id %>/add-service">
+                        <a href="/services/<%= vehicle.id %>/add-service">
                             <button type="button" class="btn btn-primary">Shto</button>
                         </a>
                     </div>
@@ -62,9 +62,9 @@
                             </td>
                             <td>
                                 <!-- <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a> -->
-                                <a href="/services/update-service/<%= element._id %>" class="edit" title="Edito"
+                                <a href="/services/update-service/<%= element.id %>" class="edit" title="Edito"
                                     data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij"
+                                <a href="#" class="delete" onclick="myFunction('<%= element.id %>')" title="Fshij"
                                     data-toggle="tooltip" data-id="<%= element._id %>"><i class="material-icons"
                                         style="color: red;">&#xE872;</i>
                                 </a>

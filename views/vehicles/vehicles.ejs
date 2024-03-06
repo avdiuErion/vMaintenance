@@ -39,13 +39,13 @@
                 <%= element.kilometres %>
               </td>
               <td>
-                <a href="services/GetByVehicleId/<%= element._id %>" class="edit" title="Servisimet"
+                <a href="services/GetByVehicleId/<%= element.id %>" class="edit" title="Servisimet"
                   data-toggle="tooltip"><i class="material-icons" style="color: green;">&#xf049;</i></a>
-                <a href="maintenances/byVId/<%= element._id %>" class="edit" title="Mirëmbajtjet" data-toggle="tooltip"><i
+                <a href="maintenances/byVId/<%= element.id %>" class="edit" title="Mirëmbajtjet" data-toggle="tooltip"><i
                     class="material-icons" style="color: bluegreen;">&#xea56;</i></a>
-                <a href="vehicles/update-vehicle/<%= element._id %>" class="edit" title="Edito" data-toggle="tooltip"><i
+                <a href="vehicles/update-vehicle/<%= element.id %>" class="edit" title="Edito" data-toggle="tooltip"><i
                     class="material-icons">&#xE254;</i></a>
-                  <a href="#" class="delete" onclick="myFunction('<%= element._id %>')" title="Fshij" data-toggle="tooltip"
+                  <a href="#" class="delete" onclick="myFunction('<%= element.id %>')" title="Fshij" data-toggle="tooltip"
                     data-id="<%= element._id %>"><i class="material-icons" style="color: red;">&#xE872;</i></a>
               </td>
             </tr>

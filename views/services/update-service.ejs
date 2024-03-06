@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="col-md-2">
-        <form action="/services/<%= data._id %>?_method=DELETE" method="post">
+        <form action="/services/<%= data.id %>?_method=DELETE" method="post">
             <button type="submit" class="btn btn-danger">Fshij</button>
         </form>
 </div>
@@ -15,7 +15,7 @@
 
 <div>
     <h2 style="padding-bottom: 1%; padding-top: 1%;">Edito servisimin</h2>
-    <form action="/services/<%= data._id %>?_method=PUT" method="post">
+    <form action="/services/<%= data.id %>?_method=PUT" method="post">
         <div class="form-group row">
             <label for="colFormLabel" class="col-sm-2 col-form-label">Kilometrat</label>
             <div class="col-sm-6">
