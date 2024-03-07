@@ -1,10 +1,17 @@
 const { Sequelize } = require('sequelize');
 
 const connString = process.env.CONNECTION_STRING;
+console.log(connString);
 
 const sequelize = new Sequelize(connString, {
     dialect: 'postgres',
-    logging: false
+    logging: false,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: true,
+        },
+    },
 });
 
 const connectDB = async () => {
