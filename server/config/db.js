@@ -9,6 +9,7 @@ const sequelize = new Sequelize(connString, {
     dialectOptions: {
         ssl: {
             require: true,
+            rejectUnauthorized: false,
         },
     },
 });
