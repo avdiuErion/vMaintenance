@@ -1,6 +1,7 @@
 const User = require('./users.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -43,8 +44,13 @@ async function GetAllUsers(userId) {
         throw new Error('Not authorized to see data!');
     }
 
-    return await User.find({ isActive: true, username: { $ne: 'admin' } }, {
-        '__v': 0
+    return await User.findAll({
+        where: { 
+            isActive: true,
+            username: {
+                [Op.ne]: 'admin'
+            }
+        },
     });
 }
 
@@ -55,9 +61,10 @@ async function DeleteUser(id) {
     }
 
     user.isActive = false;
-    console.log(user);
 
-    return await User.findByIdAndUpdate(id, user);
+    return await User.destroy({
+        where: { id: id }
+    });
 }
 
 async function GetById(id) {
