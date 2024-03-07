@@ -1,13 +1,13 @@
 const Service = require('./services.model');
 
 async function getAllServicesByVehicleId(vehicleId){
-    return await Service.find({vehicleId: vehicleId}, {
+    return await Service.findAll({where: {vehicleId: vehicleId}}, {
         '__v': 0
     });
 }
 
 async function getById(id){
-    return await Service.findById(id);
+    return await Service.findByPk(id);
 }
 
 async function addNewService(service){
@@ -18,19 +18,27 @@ async function addNewService(service){
 
 async function updateService(id, service){
     await adjustCheckBoxes(service);
-    const serviceRecord = await Service.findById(id);
+    const serviceRecord = await Service.findByPk(id);
     if(!serviceRecord)
         throw new Error(`Service doesn't exist`);
 
-    return await Service.findByIdAndUpdate(id, service);
+    if (serviceRecord) {
+        Object.assign(serviceRecord, service);
+    
+        await serviceRecord.save();
+    }
+
+    return serviceRecord;
 }
 
 async function deleteService(id){
-    const service = await Service.findById(id);
+    const service = await Service.findByPk(id);
     if(!service)
         throw new Error(`Service doesn't exist`);
 
-    return await Service.findByIdAndDelete(id);
+    return await Service.destroy({
+        where: { id: id }
+    });
 }
 
 async function adjustCheckBoxes(service){

@@ -1,46 +1,43 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../../config/db.js');
+const Vehicle = require('../vehicles/vehicles.model.js');
 
-const serviceSchema = new mongoose.Schema({
+const Service = sequelize.define('Service', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     kilometres: {
-        type: String,
+        type: DataTypes.STRING,
         required: true,
         default: null
     },
     oil: {
-        type: Boolean,
+        type: DataTypes.BOOLEAN,
         required: true,
         default: false
     },
     oilFilter: {
-        type: Boolean,
+        type: DataTypes.BOOLEAN,
         required: true,
         default: false
     },
     fuelFilter: {
-        type: Boolean,
+        type: DataTypes.BOOLEAN,
         required: true,
         default: false
     },
     airFilter: {
-        type: Boolean,
+        type: DataTypes.BOOLEAN,
         required: true,
         default: false
     },
     notes: {
-        type: String,
+        type: DataTypes.STRING,
     },
-    vehicleId:{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Vehicle',
-        required: true
-    },
-    createdAt: {
-        type: Date
-    },
-    updateAt: {
-        type: Date,
-        default: Date.now
-    }
 });
 
-module.exports = mongoose.model('Service', serviceSchema);
+Service.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+
+module.exports = Service;

@@ -6,43 +6,43 @@ const { getAllMaintenancesByVehicleId,
 
 const vehicleService = require('../vehicles/vehicles.service');
 
-async function httpGetAllMaintenancesByVehicleId(req, res){
-    try{
+async function httpGetAllMaintenancesByVehicleId(req, res) {
+    try {
         const vehicle = await vehicleService.getById(req.params.vehicleId);
-        const data = await getAllMaintenancesByVehicleId(vehicle._id);
+        const data = await getAllMaintenancesByVehicleId(vehicle.id);
 
         res.render('maintenance/maintenances', {
             data,
             vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
 
-async function httpGetMaintenanceById(req, res){
-    try{
+async function httpGetMaintenanceById(req, res) {
+    try {
         const id = req.params.id;
         const maintenace = await getById(id);
-    
-        if(maintenace)
+
+        if (maintenace)
             return res.status(200).json(maintenace);
 
         return res.status(404).json();
 
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
-    } 
+    }
 }
 
-async function httpAddNewMaintenance(req, res){
-    try{
+async function httpAddNewMaintenance(req, res) {
+    try {
         const vehicleId = req.params.vehicleId;
         const maintenace = req.body;
         maintenace.vehicleId = vehicleId;
 
         await addNewMaintenance(maintenace);
-    
+
         const data = await getAllMaintenancesByVehicleId(vehicleId);
         const vehicle = await vehicleService.getById(vehicleId);
 
@@ -50,7 +50,7 @@ async function httpAddNewMaintenance(req, res){
             data,
             vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
@@ -63,12 +63,12 @@ async function httpGetAddMaintenance(req, res) {
     });
 }
 
-async function httpUpdateMaintenance(req, res){
-    try{
+async function httpUpdateMaintenance(req, res) {
+    try {
         const id = req.params.id;
         const maintenace = req.body;
         var updatedMaintenance = await updateMaintenance(id, maintenace);
-        
+
         const vehicleId = updatedMaintenance.vehicleId;
         const data = await getAllMaintenancesByVehicleId(vehicleId);
         const vehicle = await vehicleService.getById(vehicleId);
@@ -77,7 +77,7 @@ async function httpUpdateMaintenance(req, res){
             data,
             vehicle
         });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }
@@ -91,13 +91,13 @@ async function httpGetUpdateMaintenance(req, res) {
     });
 }
 
-async function httpDeleteMaintenance(req, res){
-    try{
+async function httpDeleteMaintenance(req, res) {
+    try {
         const id = req.params.id;
         await deleteMaintenance(id);
-        
+
         res.status(200).json({ message: 'Maintenance deleted' });
-    }catch(Error){
+    } catch (Error) {
         return res.status(400).json(`${Error}`);
     }
 }

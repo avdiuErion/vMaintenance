@@ -5,13 +5,13 @@ const { SendEmail } = require('../../helpers/email.sender');
 const serviceKmLimit = process.env.SERVICE_KM_LIMIT;
 
 async function getAllVehicles(userId) {
-    return await Vehicle.find({ userId: userId }, {
+    return await Vehicle.findAll({ where: { userId: userId } }, {
         '__v': 0
     });
 }
 
 async function getById(id) {
-    return await Vehicle.findById(id);
+    return await Vehicle.findByPk(id);
 }
 
 async function addNewVehicle(vehicle, userId) {
@@ -26,17 +26,26 @@ async function addNewVehicle(vehicle, userId) {
 }
 
 async function updateVehicle(id, vehicle) {
-    const vehicleRecord = await Vehicle.findById(id);
+    const vehicleRecord = await Vehicle.findByPk(id);
     if (!vehicleRecord)
         throw new Error(`Vehicle doesn't exist`);
 
-    await Vehicle.findByIdAndUpdate(id, vehicle);
+    const existingRecord = await Vehicle.findByPk(id);
 
-    const serviceRecord = await Service.findOne({ vehicleId: id })
-        .sort({ createdAt: -1 })
-        .exec();
+    if (vehicle) {
+        Object.assign(existingRecord, vehicle);
+    
+        await existingRecord.save();
+    } else {
+        console.error('Vehicle not found');
+    }
 
-    const updatedVehicle = await Vehicle.findById(id);
+    const serviceRecord = await Service.findOne({
+        where: { vehicleId: id },
+        order: [['createdAt', 'DESC']] 
+    });
+
+    const updatedVehicle = await Vehicle.findByPk(id);
 
     let serviceKilometres = 0;
 
@@ -57,17 +66,21 @@ async function updateVehicle(id, vehicle) {
 }
 
 async function deleteVehicle(id) {
-    const vehicle = await Vehicle.findById(id);
+    const vehicle = await Vehicle.findByPk(id);
     if (!vehicle) {
         throw new Error(`Vehicle doesn't exist`);
     }
 
-    await Vehicle.findByIdAndDelete(id);
+    await Vehicle.destroy({
+        where: { id: id }
+    });
 }
 
 async function existsVehicle(licensePlates) {
     return await Vehicle.findOne({
-        licensePlates: licensePlates
+        where: {
+            licensePlates: licensePlates
+        }
     });
 }
 

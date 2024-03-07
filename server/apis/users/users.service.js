@@ -11,13 +11,13 @@ async function Register(username, password) {
 }
 
 async function Login(username, password) {
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ where: { username: username }, raw: true });
 
     if (!user) {
         throw new Error('Autentifikimi deshtoi. Ju lutemi shikoni kredencialet!');
     }
 
-    if(!user.isActive){
+    if (!user.isActive) {
         throw new Error('Perdoruesi eshte jo aktiv!');
     }
 
@@ -27,30 +27,30 @@ async function Login(username, password) {
         throw new Error('Autentifikimi deshtoi. Ju lutemi shikoni kredencialet!');
     }
 
-    return jwt.sign({ userId: user._id }, jwtSecret);
+    return jwt.sign({ userId: user.id }, jwtSecret);
 }
 
 async function GetUserIdFromToken(token) {
-    const decoded = jwt.verify(token, jwtSecret);  
-    const userId = decoded.userId;  
+    const decoded = jwt.verify(token, jwtSecret);
+    const userId = decoded.userId;
 
     return userId;
 }
 
-async function GetAllUsers(userId){
-    const user = await User.findById(userId);
-    if(user.username !== 'admin'){
+async function GetAllUsers(userId) {
+    const user = await User.findByPk(userId);
+    if (user.username !== 'admin') {
         throw new Error('Not authorized to see data!');
     }
 
-    return await User.find({isActive: true, username: { $ne: 'admin' } }, {
+    return await User.find({ isActive: true, username: { $ne: 'admin' } }, {
         '__v': 0
     });
 }
 
-async function DeleteUser(id){
+async function DeleteUser(id) {
     const user = await User.findById(id);
-    if(!user){
+    if (!user) {
         throw new Error(`User doesn't exist`);
     }
 
@@ -60,8 +60,8 @@ async function DeleteUser(id){
     return await User.findByIdAndUpdate(id, user);
 }
 
-async function GetById(id){
-    return await User.findById(id);
+async function GetById(id) {
+    return await User.findByPk(id);
 }
 
 module.exports = {

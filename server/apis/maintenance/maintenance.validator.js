@@ -11,8 +11,8 @@ const maintenancesBaseValidator = [
             return true;
         })
         .custom(value => {
-            if (typeof value !== 'undefined' && value < 0) {
-                throw new Error('Cmimi nuk mund te jete me pak se 0');
+            if (typeof value !== 'undefined' && value < 0 || value == '') {
+                throw new Error('Cmimi nuk mund te jete me pak se 0 e as i zbrazet');
             }
             return true;
         })
